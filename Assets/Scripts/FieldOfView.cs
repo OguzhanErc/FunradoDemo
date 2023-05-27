@@ -22,6 +22,8 @@ public class FieldOfView : MonoBehaviour
 
     public MeshFilter viewMeshFilter;
     Mesh viewMesh;
+
+   public float distanceToTarget;
     private void Start()
     {
         viewMesh = new Mesh();
@@ -51,7 +53,7 @@ public class FieldOfView : MonoBehaviour
             Vector3 directionToTarget = (target.position - transform.position).normalized;
             if (Vector3.Angle(transform.forward, directionToTarget) < viewAngle / 2)
             {
-                float distanceToTarget = Vector3.Distance(transform.position, target.position);
+              float distanceToTarget = Vector3.Distance(transform.position, target.position);
                 if (!Physics.Raycast(transform.position, directionToTarget, distanceToTarget, obstacleMask))
                 {
                     visibleTargets.Add(target);
@@ -87,8 +89,6 @@ public class FieldOfView : MonoBehaviour
                     }
                 }
             }
-
-
             viewPoints.Add(newViewCast.point);
             oldViewCast = newViewCast;
         }
@@ -108,7 +108,6 @@ public class FieldOfView : MonoBehaviour
                 triangles[i * 3 + 1] = i + 1;
                 triangles[i * 3 + 2] = i + 2;
             }
-
         }
         viewMesh.Clear();
         viewMesh.vertices = vertices;
@@ -143,11 +142,7 @@ public class FieldOfView : MonoBehaviour
         return new EdgeInfo(minPoint, maxPoint);
 
     }
-    /// <summary>
-    /// Casting Ray
-    /// </summary>
-    /// <param name="globalAngle"></param>
-    /// <returns></returns>
+  
     ViewCastInfo ViewCast(float globalAngle)
     {
         Vector3 dir = DirectionFromAngle(globalAngle, true);
