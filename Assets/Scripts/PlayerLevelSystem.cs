@@ -14,7 +14,7 @@ public class PlayerLevelSystem : MonoBehaviour
     {
         if (currentLevel==0)
         {
-            Debug.Log("Level Dustu");
+          
         }
     }
 }

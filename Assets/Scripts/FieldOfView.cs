@@ -23,13 +23,14 @@ public class FieldOfView : MonoBehaviour
     public MeshFilter viewMeshFilter;
     Mesh viewMesh;
 
-   public float distanceToTarget;
+    public float distanceToTarget;
     private void Start()
     {
         viewMesh = new Mesh();
         viewMesh.name = "View Mesh";
         viewMeshFilter.mesh = viewMesh;
         StartCoroutine("FindTargetsWithDelay", .2f);
+
     }
     private void LateUpdate()
     {
@@ -53,10 +54,21 @@ public class FieldOfView : MonoBehaviour
             Vector3 directionToTarget = (target.position - transform.position).normalized;
             if (Vector3.Angle(transform.forward, directionToTarget) < viewAngle / 2)
             {
-              float distanceToTarget = Vector3.Distance(transform.position, target.position);
+                float distanceToTarget = Vector3.Distance(transform.position, target.position);
                 if (!Physics.Raycast(transform.position, directionToTarget, distanceToTarget, obstacleMask))
                 {
                     visibleTargets.Add(target);
+                    if (this.GetComponent<EnemyLevelSystem>().enemycurrentLevel > target.GetComponent<PlayerLevelSystem>().currentLevel)
+                    {
+                        Debug.Log("Enemy level is higher");
+                        //Player will die.
+                      
+                    }
+                    else if (this.GetComponent<EnemyLevelSystem>().enemycurrentLevel < target.GetComponent<PlayerLevelSystem>().currentLevel)
+                    {
+                        Debug.Log("Player level is higher");
+                        //Enemy will die.
+                    }
                 }
             }
         }
@@ -128,7 +140,7 @@ public class FieldOfView : MonoBehaviour
             ViewCastInfo newViewCast = ViewCast(angle);
 
             bool edgeDstThresholdExceeded = Mathf.Abs(minViewCast.distance - newViewCast.distance) > edgeDstThreshold;
-            if (newViewCast.hit == minViewCast.hit&& !edgeDstThresholdExceeded)
+            if (newViewCast.hit == minViewCast.hit && !edgeDstThresholdExceeded)
             {
                 minAngle = angle;
                 minPoint = newViewCast.point;
@@ -142,7 +154,7 @@ public class FieldOfView : MonoBehaviour
         return new EdgeInfo(minPoint, maxPoint);
 
     }
-  
+
     ViewCastInfo ViewCast(float globalAngle)
     {
         Vector3 dir = DirectionFromAngle(globalAngle, true);

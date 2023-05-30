@@ -8,7 +8,7 @@ public class EnemyLevelSystem : MonoBehaviour
 
     void Start()
     {
-        enemycurrentLevel = 2;
+        //enemycurrentLevel = 2;
     }
 
 

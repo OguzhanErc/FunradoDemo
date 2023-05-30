@@ -8,6 +8,7 @@ public class EnemyMovement : MonoBehaviour
     public Transform[] waypoints;
     int waypointIndex;
     Vector3 target;
+    public bool isEnemyStopped;
 
     void Start()
     {
@@ -22,6 +23,10 @@ public class EnemyMovement : MonoBehaviour
         {
             ItarateWaypointIndex();
             UpdateDestination();
+            if (isEnemyStopped)
+            {
+                agent.isStopped = true;
+            }
         }
     }
    void UpdateDestination()
@@ -37,4 +42,5 @@ public class EnemyMovement : MonoBehaviour
             waypointIndex = 0;
         }
     }
+   
 }
