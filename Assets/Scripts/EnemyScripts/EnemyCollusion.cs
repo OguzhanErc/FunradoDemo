@@ -7,13 +7,9 @@ using System;
 public class EnemyCollusion : MonoBehaviour
 {
     FieldOfView fieldOfView;
-    //public PlayerLevelSystem playerLevelSystem;
+    
     [SerializeField]
     float attackRange;
-
-    private float countdownDuration = 3f; // Geri sayým süresi
-    private float countdownTimer; // Geri sayým süresini takip eden zamanlayýcý
-
 
     Transform target;
     public bool enemyDies;
@@ -22,17 +18,11 @@ public class EnemyCollusion : MonoBehaviour
     Animator anim;
     Rigidbody rigidBody;
 
-    //[Serializable]
-    //public class Collisions : UnityEvent { }
-    //public Collisions Movement;
-    //public Collisions Attack;
-
     void Start()
     {
         rigidBody = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
         fieldOfView = GetComponent<FieldOfView>();
-
     }
 
     void Update()
@@ -45,15 +35,22 @@ public class EnemyCollusion : MonoBehaviour
     {
         foreach (Transform visibleTarget in fieldOfView.visibleTargets)
         {
-            //visibleTarget.GetComponent<PlayerLevelSystem>().currentLevel = 0;
-            anim.SetTrigger("EnemyAttack");
-            target = fieldOfView.visibleTargets[0];
-            anim.SetTrigger("Death");
-            Destroy(gameObject, 3f);
-            GetComponent<EnemyMovement>().isEnemyStopped = true;
+            if (GameManager.instance.playerLevelHigher)
+            {
+                anim.SetTrigger("EnemyAttack");
+                target = fieldOfView.visibleTargets[0];
+                anim.SetBool("Movement", false);
+                anim.SetTrigger("Death");
+                Destroy(gameObject, 3f);
+                GetComponent<EnemyMovement>().isEnemyStopped = true;
+                GameManager.instance.playerLevelHigher = false;
+            }
+            if (GameManager.instance.enemyLevelHigher)
+            {
+                anim.SetTrigger("EnemyAttack");
+                anim.SetBool("Movement",true);
+                GameManager.instance.enemyLevelHigher = false;
+            }          
         }
-
     }
-
-
 }

@@ -3,16 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using System;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-    [Serializable]
-    public class Events : UnityEvent { }
+   
+    public bool enemyLevelHigher;
+    public bool playerLevelHigher;
+    public bool isPlayerDead;
+    public bool isEnemyDead;
 
-    public Events PlayerDie;
-    public Events EnemyDie;
-
+    
     private void Awake()
     {
         if (instance!=null & instance !=this)
@@ -24,5 +26,4 @@ public class GameManager : MonoBehaviour
             instance = this;
         }
     }
-   
 }

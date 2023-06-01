@@ -155,10 +155,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8957083429414015389}
-  - component: {fileID: 8957083429406952469}
-  - component: {fileID: 1051560533}
-  - component: {fileID: 1051560534}
-  - component: {fileID: 1051560537}
   m_Layer: 0
   m_Name: EnemyCharacter
   m_TagString: Untagged
@@ -184,86 +180,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &8957083429406952469
-Animator:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8957083429414178905}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 555dddb0fd62c1a4a8a87449606cff55, type: 3}
-  m_Controller: {fileID: 9100000, guid: ae13232c3dccb154e9bb051e4e2bc2b5, type: 2}
-  m_CullingMode: 1
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 1
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
---- !u!136 &1051560533
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8957083429414178905}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 1.921784
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.9173582, z: 0}
---- !u!114 &1051560534
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8957083429414178905}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc86473d15002764688473be0f6b826a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  viewRadius: 2
-  viewAngle: 90
-  targetMask:
-    serializedVersion: 2
-    m_Bits: 128
-  obstacleMask:
-    serializedVersion: 2
-    m_Bits: 256
-  visibleTargets: []
-  meshResolution: 10
-  edgeResolveIterations: 4
-  edgeDstThreshold: 0.5
-  viewMeshFilter: {fileID: 372490512}
-  distanceToTarget: 0
---- !u!114 &1051560537
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8957083429414178905}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ca6b0ef05bea1d64b97c7b82f292082c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attackRange: 0
-  enemyLevel: 10
-  Movement:
-    m_PersistentCalls:
-      m_Calls: []
-  Attack:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1 &8957083429414179659
 GameObject:
   m_ObjectHideFlags: 0

@@ -61,13 +61,12 @@ public class FieldOfView : MonoBehaviour
                     if (this.GetComponent<EnemyLevelSystem>().enemycurrentLevel > target.GetComponent<PlayerLevelSystem>().currentLevel)
                     {
                         Debug.Log("Enemy level is higher");
-                        //Player will die.
-                      
+                        GameManager.instance.enemyLevelHigher = true;                     
                     }
                     else if (this.GetComponent<EnemyLevelSystem>().enemycurrentLevel < target.GetComponent<PlayerLevelSystem>().currentLevel)
                     {
                         Debug.Log("Player level is higher");
-                        //Enemy will die.
+                        GameManager.instance.playerLevelHigher = true;                    
                     }
                 }
             }

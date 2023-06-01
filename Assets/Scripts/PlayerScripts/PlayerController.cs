@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float movementSpeed = 5;
     [SerializeField] private float rotationSpeed = 500;
 
-    //Animator anim;
+    Animator anim;
 
     private Touch _touch;
 
@@ -18,21 +18,20 @@ public class PlayerController : MonoBehaviour
     public bool _isMoving;
     void Start()
     {
-        //anim = gameObject.GetComponent<Animator>();
+        anim = gameObject.GetComponent<Animator>();
+        anim.SetBool("isMoving", false);
     }
 
     void Update() 
     {
-    //    if (anim)
-    //    {
-    //        anim.SetBool("isMoving", _isMoving);
-    //    }
+      
         if (Input.touchCount > 0)
         {
             _touch = Input.GetTouch(0);
             if (_touch.phase == TouchPhase.Began)
             {
                 _dragStarted = true;
+                anim.SetBool("isMoving", true);
                 _isMoving = true;
                 _touchUp = _touch.position;
                 _touchDown = _touch.position;
@@ -48,6 +47,7 @@ public class PlayerController : MonoBehaviour
             if (_touch.phase == TouchPhase.Ended)
             {
                 _touchDown = _touch.position;
+                anim.SetBool("isMoving", false);
                 _isMoving = false;
                 _dragStarted = false;
             }
@@ -56,10 +56,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    //public bool IsMoving()
-    //{
-    //    return _isMoving;
-    //}
+
 
     Quaternion CalculateRotation()
     {
