@@ -1,17 +1,42 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class WindowsController : MonoBehaviour
 {
-    [SerializeField] float moveSpeed = 5;
-    private void Update()
+    NavMeshAgent playerNavMesh;
+    Camera playerCam;
+    Animator anim;
+    void Start()
     {
-        float h = Input.GetAxis("Horizontal");
-        float v = Input.GetAxis("Vertical");
+        anim = GetComponent<Animator>();
+        playerNavMesh = GetComponent<NavMeshAgent>();
+        playerCam = Camera.main;
+    }
 
-        var moveInput = (new Vector3(h, 0, v)).normalized;
 
-        transform.position += moveInput * moveSpeed * Time.deltaTime;
+    void Update()
+    {
+        Movement();
+
+    }
+    void Movement()
+    {
+        if (Input.GetMouseButton(0))
+        {
+            Ray myRay = playerCam.ScreenPointToRay(Input.mousePosition);
+            RaycastHit myRaycastHit;
+
+            if (Physics.Raycast(myRay, out myRaycastHit))
+            {
+                anim.SetBool("isMoving", true);
+                playerNavMesh.SetDestination(myRaycastHit.point);
+            }
+            else
+            {
+                anim.SetBool("isMoving", false);
+            }
+        }
     }
 }
